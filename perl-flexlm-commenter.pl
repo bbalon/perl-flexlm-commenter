@@ -2,9 +2,18 @@
 use strict;
 use warnings;
 use Time::Piece;
+use Getopt::Long;
 
 my $feature="INCREMENT";
-my $current_time = localtime;
+my $date = localtime->strftime("%e-%b-%Y");
+my $before = '';
+my $after = '';
+
+GetOptions ('before' => \$before,
+            'after'  => \$after,
+            'date=s' => \$date);
+
+my $comment_date = Time::Piece->strptime($date, '%e-%b-%Y');
 
 my $filename = shift(@ARGV) or die "You need to specify filename!\n";
 my $commented=0;
@@ -27,11 +36,27 @@ while (my $line = <FILE>) {
   if ($line =~ /^$feature/) {
     my @stringsplit = split(/ /, $line);
     my $tm = Time::Piece->strptime($stringsplit[4], '%e-%b-%Y');
-    if ($tm < $current_time) {
-      print "#$line";
-      if ($line =~ /\\\s*\n/) { $commented=1; }
+    if ($before) {
+      if ($tm < $comment_date) {
+        print "#$line";
+        if ($line =~ /\\\s*\n/) { $commented=1; }
+      } else {
+        print $line;
+      }
+    } elsif ($after) {
+      if ($tm > $comment_date) {
+        print "#$line";
+        if ($line =~ /\\\s*\n/) { $commented=1; }
+      } else {
+        print $line;
+      }
     } else {
-      print $line;
+      if ($tm == $comment_date) {
+        print "#$line";
+        if ($line =~ /\\\s*\n/) { $commented=1; }
+      } else {
+        print $line;
+      }
     }
     next;
   }
