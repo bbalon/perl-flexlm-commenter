@@ -3,15 +3,18 @@ use strict;
 use warnings;
 use Time::Piece;
 use Getopt::Long;
+use Term::ANSIColor qw(:constants);
 
 my $feature="INCREMENT|FEATURE";
 my $date = localtime->strftime("%e-%b-%Y");
 my $before = '';
 my $after = '';
+my $color = '';
 my $comment = "Commented $date, by perl-flexlm-commenter";
 
 GetOptions ('before' => \$before,
             'after'  => \$after,
+            'pretty'  => \$color,
             'comment=s'  => \$comment,
             'date=s' => \$date);
 
@@ -29,6 +32,7 @@ while (my $line = <FILE>) {
   } elsif ($commented == 1) {
     print "#$line";
     $commented = 0;
+    print RESET;
     next;
   }
   if (($line =~ /^\s*#/) or ($line =~ /^\s*$/)) {
@@ -63,6 +67,7 @@ while (my $line = <FILE>) {
 }
 
 sub comment_line {
+  if ($color) { print RED; }
   print "## $comment\n";
   my $commented_line = $_[0];
   print "#$commented_line";

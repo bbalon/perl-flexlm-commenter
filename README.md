@@ -12,7 +12,7 @@ Comment flexlm features that are expired
 ##Preview
 
 ```
-./perl-flexlm-commenter license_file.lic [-d %e-%b-%Y] [-b|-a] [-c]
+./perl-flexlm-commenter license_file.lic [-d %e-%b-%Y] [-b|-a] [-c] [-p]
 ```
 ```
 Options:
@@ -20,6 +20,7 @@ Options:
   -b | --before - will comment features before date specified (default is only today)
   -a | --after - will comment features after date specified (default is only today)
   -c "comment" | --comment "comment" - specify comment that will be added above comented section (default: "Commented $date - by perl-flexlm-commenter"
+  -p | pretty - will print commented line in red (!only use this for preview, to view what line will be changed!)
 ```
 ##Examples
 Comment out features expired before today
@@ -41,6 +42,7 @@ Comment out features after 24-apr-2015
 - [x] before (will commend features before date specified)
 - [x] after (will comment features after date specified; if before is specified, before wil be taken)
 - [x] add comment above commented feature describing date and reason for comment
+- [x] print lines that will be commented in red (just for preview)
 - [ ] reverse options to uncomment features and increments for some dates (before, after or between)
 - [ ] specify list of features want to comment or uncomment
 - [ ] comment between two dates or specify multiple dates to comment
