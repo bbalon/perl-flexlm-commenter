@@ -12,13 +12,27 @@ Comment flexlm features that are expired
 ##Preview
 
 ```
-./perl-flexlm-commenter license_file.lic
+./perl-flexlm-commenter license_file.lic [-d %e-%b-%Y] [-b|-a]
+```
+
+Options:
+  -d date | --date=date - enter own date (default is today)
+  -b | --before - will comment features before date specified (default is only today)
+  -a | --after - will comment features after date specified (default is only today)
+
+##Examples
+Comment out features expired before today
+```
+./perl-flexlm-commenter license_file.lic -b
+```
+Comment out features after 24-apr-2015
+```
+./perl-flexlm-commenter license_file.lic -d 24-apr-2015 -a
 ```
 
 ##Save changes to new lic file
-
 ```
-./perl-flexlm-commenter license_file.lic > new_license_file.lic
+./perl-flexlm-commenter license_file.lic [options] > new_license_file.lic
 ```
 
 #Future developement
