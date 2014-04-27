@@ -35,9 +35,8 @@ Comment out features after 24-apr-2015
 ./perl-flexlm-commenter license_file.lic [options] > new_license_file.lic
 ```
 
-#Future developement
-1. specify date with option
-2. select before, after or between
-3. currently only comments INCREMENT lines, but needs to be expanded to also comment FEATURE line
-4. reverse options to uncomment features and increments for some dates (before, after or between)
-5. add comment above commented feature describing date and reason for comment
+#Future development
+1. comment between two dates or specify multiple dates to comment
+2. currently only comments INCREMENT lines, but needs to be expanded to also comment FEATURE line
+3. reverse options to uncomment features and increments for some dates (before, after or between)
+4. add comment above commented feature describing date and reason for comment
