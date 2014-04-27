@@ -8,9 +8,11 @@ my $feature="INCREMENT|FEATURE";
 my $date = localtime->strftime("%e-%b-%Y");
 my $before = '';
 my $after = '';
+my $comment = "Commented $date, by perl-flexlm-commenter";
 
 GetOptions ('before' => \$before,
             'after'  => \$after,
+            'comment=s'  => \$comment,
             'date=s' => \$date);
 
 my $comment_date = Time::Piece->strptime($date, '%e-%b-%Y');
@@ -38,22 +40,19 @@ while (my $line = <FILE>) {
     my $tm = Time::Piece->strptime($stringsplit[4], '%e-%b-%Y');
     if ($before) {
       if ($tm < $comment_date) {
-        print "#$line";
-        if ($line =~ /\\\s*\n/) { $commented=1; }
+	comment_line($line);
       } else {
         print $line;
       }
     } elsif ($after) {
       if ($tm > $comment_date) {
-        print "#$line";
-        if ($line =~ /\\\s*\n/) { $commented=1; }
+	comment_line($line);
       } else {
         print $line;
       }
     } else {
       if ($tm == $comment_date) {
-        print "#$line";
-        if ($line =~ /\\\s*\n/) { $commented=1; }
+	comment_line($line);
       } else {
         print $line;
       }
@@ -61,4 +60,11 @@ while (my $line = <FILE>) {
     next;
   }
   print $line;
+}
+
+sub comment_line {
+  print "## $comment\n";
+  my $commented_line = $_[0];
+  print "#$commented_line";
+  if ($commented_line =~ /\\\s*\n/) { $commented=1; }
 }
