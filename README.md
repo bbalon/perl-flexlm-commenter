@@ -16,7 +16,7 @@ Comment flexlm features that are expired
 ```
 ```
 Options:
-  -d date | --date=date - enter own date (default is today)
+  -d date | --date=date - enter own date (default is today) - format needs to be %e-%b-%Y (12-apr-2015); same as in lic files
   -b | --before - will comment features before date specified (default is only today)
   -a | --after - will comment features after date specified (default is only today)
 ```
