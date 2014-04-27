@@ -4,7 +4,7 @@ use warnings;
 use Time::Piece;
 use Getopt::Long;
 
-my $feature="INCREMENT";
+my $feature="INCREMENT|FEATURE";
 my $date = localtime->strftime("%e-%b-%Y");
 my $before = '';
 my $after = '';
